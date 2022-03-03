@@ -24,7 +24,7 @@ jobs:
             name: Build docs
             command: cd docs/ && make html
         - persist_to_workspace:
-            root: docs/_build
+            root: docs/build
             paths: html
   docs-deploy:
     docker:
@@ -32,10 +32,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: docs/_build
+          at: docs/build
       - run:
           name: Disable jekyll builds
-          command: touch docs/_build/html/.nojekyll
+          command: touch docs/build/html/.nojekyll
       - run:
           name: Install and configure dependencies
           command: |
@@ -44,7 +44,7 @@ jobs:
             git config user.name "ci-build"
       - run:
           name: Deploy docs to gh-pages branch
-          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist docs/_build/html
+          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist docs/build/html
 
 
 workflows:
