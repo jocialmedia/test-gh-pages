@@ -24,7 +24,7 @@ jobs:
             name: Build docs
             command: cd docs/ && make html
         - persist_to_workspace:
-            root: docs/_build
+            root: docs/build
             paths: html
   docs-deploy:
     docker:
@@ -32,10 +32,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: docs/_build
+          at: docs/build
       - run:
           name: Disable jekyll builds
-          command: touch docs/_build/html/.nojekyll
+          command: touch docs/build/html/.nojekyll
       - run:
           name: Install and configure dependencies
           command: |
