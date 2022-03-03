@@ -26,7 +26,6 @@ jobs:
         - persist_to_workspace:
             root: docs/_build
             paths: html
-
   docs-deploy:
     docker:
       - image: node:8.10.0
@@ -60,4 +59,4 @@ workflows:
             - docs-build
           filters:
             branches:
-              only: master
+              only: main
